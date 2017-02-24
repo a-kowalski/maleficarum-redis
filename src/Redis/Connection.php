@@ -55,7 +55,9 @@ class Connection
      * Connection destructor.
      */
     public function __destruct() {
-        $this->connection->close();
+        if ($this->connection->isConnected()) {
+            $this->connection->close();
+        }
     }
 
     /**
@@ -68,15 +70,17 @@ class Connection
      * @throws \LogicException
      */
     public function __call(string $method, array $arguments) {
-        if (!$this->connection->isConnected()) {
+        $connection = $this->connection;
+
+        if (!$connection->isConnected()) {
             throw new \LogicException(sprintf('Cannot call method before connection initialization. \%s::__call()', $method, static::class));
         }
 
-        if (!method_exists($this->connection, $method)) {
+        if (!method_exists($connection, $method)) {
             throw new \LogicException(sprintf('Method "%s" does not exist. \%s::__call()', $method, static::class));
         }
 
-        return call_user_func_array([$this->connection, $method], $arguments);
+        return call_user_func_array([$connection, $method], $arguments);
     }
     /* ------------------------------------ Magic methods END ------------------------------------------ */
 
@@ -87,18 +91,16 @@ class Connection
      * @return \Maleficarum\Redis\Connection
      */
     public function connect() : \Maleficarum\Redis\Connection {
-        if ($this->connection->isConnected()) {
+        $connection = $this->connection;
+
+        if ($connection->isConnected()) {
             return $this;
         }
 
-        $this
-            ->connection
-            ->connect($this->host, $this->port);
+        $connection->connect($this->host, $this->port);
 
         if (!empty($this->password)) {
-            $this
-                ->connection
-                ->auth($this->password);
+            $connection->auth($this->password);
         }
 
         return $this;
