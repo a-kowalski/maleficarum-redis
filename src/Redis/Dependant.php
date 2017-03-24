@@ -2,10 +2,9 @@
 /**
  * This trait provides functionality common to all classes dependant on the \Maleficarum\Redis namespace
  */
+declare (strict_types=1);
 
 namespace Maleficarum\Redis;
-
-declare (strict_types=1);
 
 trait Dependant {
 
