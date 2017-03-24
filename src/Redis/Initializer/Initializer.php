@@ -19,8 +19,17 @@ class Initializer {
 		$builders = $opts['builders'] ?? [];
 		is_array($builders) or $builders = [];
 		if (!isset($builders['redis']['skip'])) {
-			\Maleficarum\Ioc\Container::register('Maleficarum\Redis\Connection\Connection', function ($dep, $opt) {
+			\Maleficarum\Ioc\Container::register('Maleficarum\Redis\Connection\Connection', function ($dep) {
+				if (!array_key_exists('Maleficarum\Config', $dep) || !isset($dep['Maleficarum\Config']['redis'])) {
+					throw new \RuntimeException('Impossible to create a \Maleficarum\Redis\Connection\Connection object - no redis config found. \Maleficarum\Ioc\Container::get()');
+				}
 
+				return (new \Maleficarum\Redis\Connection\Connection(
+					\Maleficarum\Ioc\Container::get('Redis'),
+					$dep['Maleficarum\Config']['redis']['host'],
+					(int)$dep['Maleficarum\Config']['redis']['port'],
+					$dep['Maleficarum\Config']['redis']['auth']
+				));
 			});
 		}
 
