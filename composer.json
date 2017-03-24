@@ -4,7 +4,8 @@
     "license": "proprietary",
     "require": {
         "php": ">=7.0",
-        "ext-redis": "*"
+        "ext-redis": "*",
+        "maleficarum/ioc": "^2.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^6.0"
@@ -13,5 +14,11 @@
         "psr-4": {
             "Maleficarum\\Redis\\": "src/Redis/"
         }
-    }
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "git@github.com:pharaun13/maleficarum-ioc.git"
+        }
+    ]
 }
