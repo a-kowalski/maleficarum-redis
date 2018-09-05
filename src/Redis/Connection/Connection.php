@@ -7,9 +7,9 @@ declare (strict_types=1);
 namespace Maleficarum\Redis\Connection;
 
 class Connection {
-    
+
     /* ------------------------------------ Class Property START --------------------------------------- */
-    
+
     /**
      * Internal storage for redis connection
      *
@@ -41,7 +41,7 @@ class Connection {
     /* ------------------------------------ Class Property END ----------------------------------------- */
 
     /* ------------------------------------ Magic methods START ---------------------------------------- */
-    
+
     /**
      * Connection constructor.
      *
@@ -71,6 +71,7 @@ class Connection {
      *
      * @param string $method
      * @param array $arguments
+     *
      * @return mixed
      * @throws \LogicException
      */
@@ -87,17 +88,17 @@ class Connection {
 
         return call_user_func_array([$connection, $method], $arguments);
     }
-    
+
     /* ------------------------------------ Magic methods END ------------------------------------------ */
 
     /* ------------------------------------ Connection methods START ----------------------------------- */
-    
+
     /**
      * Connect to the redis server
      *
      * @return \Maleficarum\Redis\Connection\Connection
      */
-    public function connect() : \Maleficarum\Redis\Connection\Connection {
+    public function connect(): \Maleficarum\Redis\Connection\Connection {
         $connection = $this->connection;
 
         if ($connection->isConnected()) {
@@ -112,6 +113,6 @@ class Connection {
 
         return $this;
     }
-    
+
     /* ------------------------------------ Connection methods END ------------------------------------- */
 }

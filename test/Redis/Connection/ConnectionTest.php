@@ -2,10 +2,10 @@
 declare(strict_types = 1);
 
 /**
- * Tests for the \Maleficarum\Redis\Connection class.
+ * Tests for the \Maleficarum\Redis\Connection\Connection class.
  */
 
-namespace Maleficarum\Command\Tests;
+namespace Maleficarum\Redis\Tests\Connection;
 
 class ConnectionTest extends \PHPUnit\Framework\TestCase
 {
@@ -33,7 +33,7 @@ class ConnectionTest extends \PHPUnit\Framework\TestCase
             ->expects($this->never())
             ->method('auth');
 
-        $connection = new \Maleficarum\Redis\Connection($redis, 'foo', 1);
+        $connection = new \Maleficarum\Redis\Connection\Connection($redis, 'foo', 1);
         $connection->connect();
     }
 
@@ -63,7 +63,7 @@ class ConnectionTest extends \PHPUnit\Framework\TestCase
                 $this->equalTo('bar')
             );
 
-        $connection = new \Maleficarum\Redis\Connection($redis, 'foo', 1, 'bar');
+        $connection = new \Maleficarum\Redis\Connection\Connection($redis, 'foo', 1, 'bar');
         $connection->connect();
     }
 
@@ -82,7 +82,7 @@ class ConnectionTest extends \PHPUnit\Framework\TestCase
             ->expects($this->never())
             ->method('connect');
 
-        $connection = new \Maleficarum\Redis\Connection($redis, 'foo', 1, 'bar');
+        $connection = new \Maleficarum\Redis\Connection\Connection($redis, 'foo', 1, 'bar');
         $connection->connect();
     }
     /* ------------------------------------ Method: connect END ---------------------------------------- */
@@ -106,7 +106,7 @@ class ConnectionTest extends \PHPUnit\Framework\TestCase
             )
             ->willReturn(true);
 
-        $connection = new \Maleficarum\Redis\Connection($redis, 'foo', 1, 'bar');
+        $connection = new \Maleficarum\Redis\Connection\Connection($redis, 'foo', 1, 'bar');
         $result = $connection->select(1);
         
         $this->assertSame(true, $result);
@@ -126,7 +126,7 @@ class ConnectionTest extends \PHPUnit\Framework\TestCase
             ->method('isConnected')
             ->willReturn(false);
 
-        $connection = new \Maleficarum\Redis\Connection($redis, 'foo', 1, 'bar');
+        $connection = new \Maleficarum\Redis\Connection\Connection($redis, 'foo', 1, 'bar');
         $connection->select(0);
     }
 
@@ -144,7 +144,7 @@ class ConnectionTest extends \PHPUnit\Framework\TestCase
             ->method('isConnected')
             ->willReturn(true);
 
-        $connection = new \Maleficarum\Redis\Connection($redis, 'foo', 1, 'bar');
+        $connection = new \Maleficarum\Redis\Connection\Connection($redis, 'foo', 1, 'bar');
         $connection->foo();
     }
     /* ------------------------------------ Method: __call END ----------------------------------------- */
