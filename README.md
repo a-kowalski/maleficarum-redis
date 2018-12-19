@@ -3,6 +3,10 @@ This is the Maleficarum redis component implementation.
 
 CAUTION: This component is now obsolete - use Maleficarum Storage instead: https://github.com/pharaun13/maleficarum-storage
 
+## [4.0.0] - 2018-11-27
+### Changed
+- Component updated to work with Maleficarum\Ioc 3.X 
+
 ## [3.0.0] - 2017-08-03
 ### Changed
 - Make use of nullable types provided in PHP 7.1 (http://php.net/manual/en/migration71.new-features.php)
