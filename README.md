@@ -3,6 +3,10 @@ This is the Maleficarum redis component implementation.
 
 CAUTION: This component is now obsolete - use Maleficarum Storage instead: https://github.com/pharaun13/maleficarum-storage
 
+## [5.0.0] - 2020-12-01
+### Changed
+- Handle deprecated methods (https://github.com/phpredis/phpredis/commit/95c8aab9#diff-a1471159ac00556a439382b010c89a8507ebc6f03311ec7655cebd95dc6c978eR443)
+
 ## [4.0.0] - 2018-11-27
 ### Changed
 - Component updated to work with Maleficarum\Ioc 3.X 
